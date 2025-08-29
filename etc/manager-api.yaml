@@ -1,0 +1,10 @@
+Name: manager-api
+Host: 0.0.0.0
+Port: 8888
+KqConf:
+  Brokers: [ "127.0.0.1:9092" ]
+  Topic: "user_register_topic"
+  Group: "user_register_group"
+  Concurrency: 4
+  MaxWait: 3s
+
