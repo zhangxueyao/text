@@ -1,0 +1,25 @@
+syntax = "v1"
+
+type Item {
+	id   string
+	name string
+}
+
+type UpdateItemReq {
+	id   string
+	name string
+}
+
+type UpdateItemResp {
+	code int
+	msg  string
+}
+
+service item-api {
+	@handler GetItem
+	get /api/item/:id returns (Item)
+
+	@handler UpdateItem
+	post /api/item/update (UpdateItemReq) returns (UpdateItemResp)
+}
+
