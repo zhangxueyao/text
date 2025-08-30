@@ -1,0 +1,17 @@
+syntax = "proto3";
+package item;
+option go_package = "./itemrpc";
+
+message GetItemReq {int64 id = 1;}
+message ItemResp   {int64 id = 1; string name = 2;}
+message UpdateItemReq {
+  int64 id = 1;
+  string name = 2;
+}
+message UpdateItemResp {
+  bool success = 1;
+}
+service Item {
+  rpc GetItem (GetItemReq) returns (ItemResp);
+  rpc UpdateItem (UpdateItemReq) returns (UpdateItemResp);
+}
