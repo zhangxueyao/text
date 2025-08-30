@@ -1,4 +1,4 @@
-module github.com/zhangxueyao/item-rpc
+module github.com/zhangxueyao/item
 
 go 1.24
 
@@ -8,7 +8,7 @@ require (
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/redis/go-redis/v9 v9.12.1
 	github.com/zeromicro/go-zero v1.9.0
-	google.golang.org/grpc v1.74.2
+	google.golang.org/grpc v1.75.0
 	google.golang.org/protobuf v1.36.7
 )
 
