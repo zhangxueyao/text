@@ -14,6 +14,7 @@ type ServiceContext struct {
 	ItemRpc      itemrpc.ItemClient
 	CaptchaStore *MemoryStore
 	CodeStore    *MemoryStore
+	UserStore    *UserStore
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -26,6 +27,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		ItemRpc:      itemrpc.NewItemClient(cli.Conn()),
 		CaptchaStore: NewMemoryStore(),
 		CodeStore:    NewMemoryStore(),
+		UserStore:    NewUserStore(),
 	}
 
 	return sc

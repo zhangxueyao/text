@@ -41,6 +41,24 @@ type LoginResp {
         expire int64
 }
 
+type RegisterReq {
+       mobile   string
+       password string
+       email    string
+       age      int
+       gender   string
+}
+
+type RegisterResp {
+       code int
+       msg  string
+}
+
+type PasswordLoginReq {
+       mobile   string
+       password string
+}
+
 service item-api {
         @handler Captcha
         get /api/captcha returns (CaptchaResp)
@@ -50,6 +68,12 @@ service item-api {
 
         @handler Login
         post /api/login (LoginReq) returns (LoginResp)
+
+       @handler PasswordLogin
+       post /api/login/password (PasswordLoginReq) returns (LoginResp)
+
+       @handler Register
+       post /api/register (RegisterReq) returns (RegisterResp)
 
         @handler GetItem
         get /api/item/:id returns (Item)
