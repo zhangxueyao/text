@@ -32,3 +32,13 @@ func (s *ItemServer) UpdateItem(ctx context.Context, in *itemrpc.UpdateItemReq) 
 	l := logic.NewUpdateItemLogic(ctx, s.svcCtx)
 	return l.UpdateItem(in)
 }
+
+func (s *ItemServer) Register(ctx context.Context, in *itemrpc.RegisterReq) (*itemrpc.RegisterResp, error) {
+	l := logic.NewRegisterLogic(ctx, s.svcCtx)
+	return l.Register(in)
+}
+
+func (s *ItemServer) GetUser(ctx context.Context, in *itemrpc.GetUserReq) (*itemrpc.GetUserResp, error) {
+	l := logic.NewGetUserLogic(ctx, s.svcCtx)
+	return l.GetUser(in)
+}

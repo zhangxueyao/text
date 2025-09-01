@@ -15,13 +15,20 @@ import (
 
 type (
 	GetItemReq     = itemrpc.GetItemReq
+	GetUserReq     = itemrpc.GetUserReq
+	GetUserResp    = itemrpc.GetUserResp
 	ItemResp       = itemrpc.ItemResp
+	RegisterReq    = itemrpc.RegisterReq
+	RegisterResp   = itemrpc.RegisterResp
 	UpdateItemReq  = itemrpc.UpdateItemReq
 	UpdateItemResp = itemrpc.UpdateItemResp
+	User           = itemrpc.User
 
 	Item interface {
 		GetItem(ctx context.Context, in *GetItemReq, opts ...grpc.CallOption) (*ItemResp, error)
 		UpdateItem(ctx context.Context, in *UpdateItemReq, opts ...grpc.CallOption) (*UpdateItemResp, error)
+		Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error)
+		GetUser(ctx context.Context, in *GetUserReq, opts ...grpc.CallOption) (*GetUserResp, error)
 	}
 
 	defaultItem struct {
@@ -43,4 +50,14 @@ func (m *defaultItem) GetItem(ctx context.Context, in *GetItemReq, opts ...grpc.
 func (m *defaultItem) UpdateItem(ctx context.Context, in *UpdateItemReq, opts ...grpc.CallOption) (*UpdateItemResp, error) {
 	client := itemrpc.NewItemClient(m.cli.Conn())
 	return client.UpdateItem(ctx, in, opts...)
+}
+
+func (m *defaultItem) Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error) {
+	client := itemrpc.NewItemClient(m.cli.Conn())
+	return client.Register(ctx, in, opts...)
+}
+
+func (m *defaultItem) GetUser(ctx context.Context, in *GetUserReq, opts ...grpc.CallOption) (*GetUserResp, error) {
+	client := itemrpc.NewItemClient(m.cli.Conn())
+	return client.GetUser(ctx, in, opts...)
 }

@@ -21,6 +21,8 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	Item_GetItem_FullMethodName    = "/item.Item/GetItem"
 	Item_UpdateItem_FullMethodName = "/item.Item/UpdateItem"
+	Item_Register_FullMethodName   = "/item.Item/Register"
+	Item_GetUser_FullMethodName    = "/item.Item/GetUser"
 )
 
 // ItemClient is the client API for Item service.
@@ -29,6 +31,8 @@ const (
 type ItemClient interface {
 	GetItem(ctx context.Context, in *GetItemReq, opts ...grpc.CallOption) (*ItemResp, error)
 	UpdateItem(ctx context.Context, in *UpdateItemReq, opts ...grpc.CallOption) (*UpdateItemResp, error)
+	Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error)
+	GetUser(ctx context.Context, in *GetUserReq, opts ...grpc.CallOption) (*GetUserResp, error)
 }
 
 type itemClient struct {
@@ -59,12 +63,34 @@ func (c *itemClient) UpdateItem(ctx context.Context, in *UpdateItemReq, opts ...
 	return out, nil
 }
 
+func (c *itemClient) Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterResp)
+	err := c.cc.Invoke(ctx, Item_Register_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *itemClient) GetUser(ctx context.Context, in *GetUserReq, opts ...grpc.CallOption) (*GetUserResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserResp)
+	err := c.cc.Invoke(ctx, Item_GetUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ItemServer is the server API for Item service.
 // All implementations must embed UnimplementedItemServer
 // for forward compatibility.
 type ItemServer interface {
 	GetItem(context.Context, *GetItemReq) (*ItemResp, error)
 	UpdateItem(context.Context, *UpdateItemReq) (*UpdateItemResp, error)
+	Register(context.Context, *RegisterReq) (*RegisterResp, error)
+	GetUser(context.Context, *GetUserReq) (*GetUserResp, error)
 	mustEmbedUnimplementedItemServer()
 }
 
@@ -80,6 +106,12 @@ func (UnimplementedItemServer) GetItem(context.Context, *GetItemReq) (*ItemResp,
 }
 func (UnimplementedItemServer) UpdateItem(context.Context, *UpdateItemReq) (*UpdateItemResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateItem not implemented")
+}
+func (UnimplementedItemServer) Register(context.Context, *RegisterReq) (*RegisterResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
+}
+func (UnimplementedItemServer) GetUser(context.Context, *GetUserReq) (*GetUserResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
 }
 func (UnimplementedItemServer) mustEmbedUnimplementedItemServer() {}
 func (UnimplementedItemServer) testEmbeddedByValue()              {}
@@ -138,6 +170,42 @@ func _Item_UpdateItem_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Item_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ItemServer).Register(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Item_Register_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ItemServer).Register(ctx, req.(*RegisterReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Item_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ItemServer).GetUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Item_GetUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ItemServer).GetUser(ctx, req.(*GetUserReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Item_ServiceDesc is the grpc.ServiceDesc for Item service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -152,6 +220,14 @@ var Item_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateItem",
 			Handler:    _Item_UpdateItem_Handler,
+		},
+		{
+			MethodName: "Register",
+			Handler:    _Item_Register_Handler,
+		},
+		{
+			MethodName: "GetUser",
+			Handler:    _Item_GetUser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

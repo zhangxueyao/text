@@ -11,7 +11,7 @@ import (
 	"github.com/zeromicro/go-zero/core/syncx"
 	cachex "github.com/zhangxueyao/item/item-rpc/cache"
 	"github.com/zhangxueyao/item/item-rpc/internal/config"
-	model2 "github.com/zhangxueyao/item/item-rpc/internal/model"
+	"github.com/zhangxueyao/item/item-rpc/internal/model"
 	"github.com/zhangxueyao/item/item-rpc/internal/mq/producer"
 	"github.com/zhangxueyao/item/item-rpc/pkg"
 )
@@ -24,8 +24,9 @@ type ServiceContext struct {
 	Redis      *redis.Client
 	KafkaProd  producer.Producer
 
-	ItemModel   model2.ItemModel
-	OutboxModel model2.OutboxModel
+	ItemModel   model.ItemModel
+	UserModel   model.UserModel
+	OutboxModel model.OutboxModel
 	Snowflake   *pkg.SnowflakeIDGenerator
 }
 
@@ -58,8 +59,9 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		LocalCache:  lc,
 		Redis:       rdb,
 		KafkaProd:   kp,
-		ItemModel:   model2.NewItemModel(db),
-		OutboxModel: model2.NewOutboxModel(db),
+		ItemModel:   model.NewItemModel(db),
+		UserModel:   model.NewUserModel(db),
+		OutboxModel: model.NewOutboxModel(db),
 		Snowflake:   snowflake,
 	}
 	// 订阅本地失效频道，跨实例同步清理 LocalCache

@@ -17,3 +17,47 @@ type UpdateItemResp struct {
 	Code int
 	Msg  string
 }
+
+type CaptchaResp struct {
+	CaptchaId   string `json:"captcha_id"`
+	ImageBase64 string `json:"image_base64"`
+}
+
+type SendCodeReq struct {
+	Mobile    string `json:"mobile"`
+	CaptchaId string `json:"captcha_id"`
+	Captcha   string `json:"captcha"`
+}
+
+type SendCodeResp struct {
+	Code int    `json:"code"`
+	Msg  string `json:"msg"`
+}
+
+type LoginReq struct {
+	Mobile string `json:"mobile"`
+	Code   string `json:"code"`
+}
+
+type LoginResp struct {
+	Token  string `json:"token"`
+	Expire int64  `json:"expire"`
+}
+
+type RegisterReq struct {
+	Mobile   string `json:"mobile"`
+	Password string `json:"password"`
+	Email    string `json:"email"`
+	Age      int    `json:"age"`
+	Gender   string `json:"gender"`
+}
+
+type RegisterResp struct {
+	Code int    `json:"code"`
+	Msg  string `json:"msg"`
+}
+
+type PasswordLoginReq struct {
+	Mobile   string `json:"mobile"`
+	Password string `json:"password"`
+}

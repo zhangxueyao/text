@@ -11,7 +11,37 @@ message UpdateItemReq {
 message UpdateItemResp {
   bool success = 1;
 }
+
+
+message User {
+  string mobile = 1;
+  string password = 2;
+  string email = 3;
+  int32 age = 4;
+  string gender = 5;
+}
+
+message RegisterReq {
+  User user = 1;
+}
+
+message RegisterResp {
+  bool success = 1;
+  string message = 2;
+}
+
+message GetUserReq {
+  string mobile = 1;
+}
+
+message GetUserResp {
+  User user = 1;
+  bool exists = 2;
+}
+
 service Item {
   rpc GetItem (GetItemReq) returns (ItemResp);
   rpc UpdateItem (UpdateItemReq) returns (UpdateItemResp);
+  rpc Register (RegisterReq) returns (RegisterResp);
+  rpc GetUser (GetUserReq) returns (GetUserResp);
 }
