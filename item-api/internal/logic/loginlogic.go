@@ -9,6 +9,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zhangxueyao/item/item-api/internal/svc"
 	"github.com/zhangxueyao/item/item-api/internal/types"
+	"github.com/zhangxueyao/item/item-rpc/itemrpc"
 )
 
 type LoginLogic struct {
@@ -22,9 +23,14 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 }
 
 func (l *LoginLogic) Login(req *types.LoginReq) (*types.LoginResp, error) {
-	if !l.svcCtx.UserStore.Exists(req.Mobile) {
-		return nil, errors.New("user not registered")
+	_, err := l.svcCtx.ItemRpc.GetUser(l.ctx, &itemrpc.GetUserReq{
+		Mobile: req.Mobile,
+	})
+
+	if err != nil {
+		return nil, err
 	}
+
 	code, ok := l.svcCtx.CodeStore.Get(req.Mobile)
 	if !ok || code != req.Code {
 		return nil, errors.New("invalid code")

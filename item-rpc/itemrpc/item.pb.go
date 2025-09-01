@@ -213,6 +213,274 @@ func (x *UpdateItemResp) GetSuccess() bool {
 	return false
 }
 
+type User struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Mobile        string                 `protobuf:"bytes,1,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
+	Age           int32                  `protobuf:"varint,4,opt,name=age,proto3" json:"age,omitempty"`
+	Gender        string                 `protobuf:"bytes,5,opt,name=gender,proto3" json:"gender,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *User) Reset() {
+	*x = User{}
+	mi := &file_item_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *User) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*User) ProtoMessage() {}
+
+func (x *User) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use User.ProtoReflect.Descriptor instead.
+func (*User) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *User) GetMobile() string {
+	if x != nil {
+		return x.Mobile
+	}
+	return ""
+}
+
+func (x *User) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *User) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *User) GetAge() int32 {
+	if x != nil {
+		return x.Age
+	}
+	return 0
+}
+
+func (x *User) GetGender() string {
+	if x != nil {
+		return x.Gender
+	}
+	return ""
+}
+
+type RegisterReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	User          *User                  `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RegisterReq) Reset() {
+	*x = RegisterReq{}
+	mi := &file_item_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterReq) ProtoMessage() {}
+
+func (x *RegisterReq) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegisterReq.ProtoReflect.Descriptor instead.
+func (*RegisterReq) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *RegisterReq) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+type RegisterResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RegisterResp) Reset() {
+	*x = RegisterResp{}
+	mi := &file_item_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterResp) ProtoMessage() {}
+
+func (x *RegisterResp) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegisterResp.ProtoReflect.Descriptor instead.
+func (*RegisterResp) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *RegisterResp) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *RegisterResp) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+type GetUserReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Mobile        string                 `protobuf:"bytes,1,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserReq) Reset() {
+	*x = GetUserReq{}
+	mi := &file_item_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserReq) ProtoMessage() {}
+
+func (x *GetUserReq) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserReq.ProtoReflect.Descriptor instead.
+func (*GetUserReq) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetUserReq) GetMobile() string {
+	if x != nil {
+		return x.Mobile
+	}
+	return ""
+}
+
+type GetUserResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	User          *User                  `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
+	Exists        bool                   `protobuf:"varint,2,opt,name=exists,proto3" json:"exists,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserResp) Reset() {
+	*x = GetUserResp{}
+	mi := &file_item_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserResp) ProtoMessage() {}
+
+func (x *GetUserResp) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserResp.ProtoReflect.Descriptor instead.
+func (*GetUserResp) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetUserResp) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+func (x *GetUserResp) GetExists() bool {
+	if x != nil {
+		return x.Exists
+	}
+	return false
+}
+
 var File_item_proto protoreflect.FileDescriptor
 
 const file_item_proto_rawDesc = "" +
@@ -229,11 +497,32 @@ const file_item_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\"*\n" +
 	"\x0eUpdateItemResp\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess2l\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"z\n" +
+	"\x04User\x12\x16\n" +
+	"\x06mobile\x18\x01 \x01(\tR\x06mobile\x12\x1a\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x14\n" +
+	"\x05email\x18\x03 \x01(\tR\x05email\x12\x10\n" +
+	"\x03age\x18\x04 \x01(\x05R\x03age\x12\x16\n" +
+	"\x06gender\x18\x05 \x01(\tR\x06gender\"-\n" +
+	"\vRegisterReq\x12\x1e\n" +
+	"\x04user\x18\x01 \x01(\v2\n" +
+	".item.UserR\x04user\"B\n" +
+	"\fRegisterResp\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"$\n" +
+	"\n" +
+	"GetUserReq\x12\x16\n" +
+	"\x06mobile\x18\x01 \x01(\tR\x06mobile\"E\n" +
+	"\vGetUserResp\x12\x1e\n" +
+	"\x04user\x18\x01 \x01(\v2\n" +
+	".item.UserR\x04user\x12\x16\n" +
+	"\x06exists\x18\x02 \x01(\bR\x06exists2\xcf\x01\n" +
 	"\x04Item\x12+\n" +
 	"\aGetItem\x12\x10.item.GetItemReq\x1a\x0e.item.ItemResp\x127\n" +
 	"\n" +
-	"UpdateItem\x12\x13.item.UpdateItemReq\x1a\x14.item.UpdateItemRespB\vZ\t./itemrpcb\x06proto3"
+	"UpdateItem\x12\x13.item.UpdateItemReq\x1a\x14.item.UpdateItemResp\x121\n" +
+	"\bRegister\x12\x11.item.RegisterReq\x1a\x12.item.RegisterResp\x12.\n" +
+	"\aGetUser\x12\x10.item.GetUserReq\x1a\x11.item.GetUserRespB\vZ\t./itemrpcb\x06proto3"
 
 var (
 	file_item_proto_rawDescOnce sync.Once
@@ -247,23 +536,34 @@ func file_item_proto_rawDescGZIP() []byte {
 	return file_item_proto_rawDescData
 }
 
-var file_item_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_item_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_item_proto_goTypes = []any{
 	(*GetItemReq)(nil),     // 0: item.GetItemReq
 	(*ItemResp)(nil),       // 1: item.ItemResp
 	(*UpdateItemReq)(nil),  // 2: item.UpdateItemReq
 	(*UpdateItemResp)(nil), // 3: item.UpdateItemResp
+	(*User)(nil),           // 4: item.User
+	(*RegisterReq)(nil),    // 5: item.RegisterReq
+	(*RegisterResp)(nil),   // 6: item.RegisterResp
+	(*GetUserReq)(nil),     // 7: item.GetUserReq
+	(*GetUserResp)(nil),    // 8: item.GetUserResp
 }
 var file_item_proto_depIdxs = []int32{
-	0, // 0: item.Item.GetItem:input_type -> item.GetItemReq
-	2, // 1: item.Item.UpdateItem:input_type -> item.UpdateItemReq
-	1, // 2: item.Item.GetItem:output_type -> item.ItemResp
-	3, // 3: item.Item.UpdateItem:output_type -> item.UpdateItemResp
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	4, // 0: item.RegisterReq.user:type_name -> item.User
+	4, // 1: item.GetUserResp.user:type_name -> item.User
+	0, // 2: item.Item.GetItem:input_type -> item.GetItemReq
+	2, // 3: item.Item.UpdateItem:input_type -> item.UpdateItemReq
+	5, // 4: item.Item.Register:input_type -> item.RegisterReq
+	7, // 5: item.Item.GetUser:input_type -> item.GetUserReq
+	1, // 6: item.Item.GetItem:output_type -> item.ItemResp
+	3, // 7: item.Item.UpdateItem:output_type -> item.UpdateItemResp
+	6, // 8: item.Item.Register:output_type -> item.RegisterResp
+	8, // 9: item.Item.GetUser:output_type -> item.GetUserResp
+	6, // [6:10] is the sub-list for method output_type
+	2, // [2:6] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_item_proto_init() }
@@ -277,7 +577,7 @@ func file_item_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_item_proto_rawDesc), len(file_item_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

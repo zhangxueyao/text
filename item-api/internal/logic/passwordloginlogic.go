@@ -8,6 +8,7 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/zhangxueyao/item/item-api/internal/svc"
 	"github.com/zhangxueyao/item/item-api/internal/types"
+	"github.com/zhangxueyao/item/item-rpc/itemrpc"
 )
 
 type PasswordLoginLogic struct {
@@ -20,7 +21,13 @@ func NewPasswordLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Pas
 }
 
 func (l *PasswordLoginLogic) Login(req *types.PasswordLoginReq) (*types.LoginResp, error) {
-	if !l.svcCtx.UserStore.ValidatePassword(req.Mobile, req.Password) {
+	user, err := l.svcCtx.ItemRpc.GetUser(l.ctx, &itemrpc.GetUserReq{
+		Mobile: req.Mobile,
+	})
+	if err != nil {
+		return nil, err
+	}
+	if user.User.Password != req.Password {
 		return nil, errors.New("invalid credentials")
 	}
 	now := time.Now().Unix()

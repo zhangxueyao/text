@@ -8,6 +8,7 @@ import (
 
 	"github.com/zhangxueyao/item/item-api/internal/svc"
 	"github.com/zhangxueyao/item/item-api/internal/types"
+	"github.com/zhangxueyao/item/item-rpc/itemrpc"
 )
 
 type RegisterLogic struct {
@@ -42,15 +43,18 @@ func (l *RegisterLogic) Register(req *types.RegisterReq) (*types.RegisterResp, e
 	if isWeakPassword(req.Password) {
 		return nil, errors.New("weak password")
 	}
-	err := l.svcCtx.UserStore.Add(svc.User{
-		Mobile:   req.Mobile,
-		Password: req.Password,
-		Email:    req.Email,
-		Age:      req.Age,
-		Gender:   req.Gender,
+
+	_, err := l.svcCtx.ItemRpc.Register(l.ctx, &itemrpc.RegisterReq{
+		User: &itemrpc.User{
+			Mobile:   req.Mobile,
+			Password: req.Password,
+			Email:    req.Email,
+			Age:      int32(req.Age),
+			Gender:   req.Gender,
+		},
 	})
 	if err != nil {
 		return nil, err
 	}
-	return &types.RegisterResp{Code: 0, Msg: "success"}, nil
+	return &types.RegisterResp{Code: 0000, Msg: "success"}, nil
 }
