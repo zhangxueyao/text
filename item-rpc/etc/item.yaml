@@ -6,27 +6,44 @@ Etcd:
     - 127.0.0.1:2379
   Key: item.rpc                 # 注册到 etcd 的服务名/键
 
-DataSource: root:pass@tcp(127.0.0.1:3306)/demo?charset=utf8mb4&parseTime=true&loc=Local
-CacheRedis:
-  - Host: 127.0.0.1:6379
-    Type: node
-    Pass: ""
-  - Host: 127.0.0.1:6380
-    Type: node
-    Pass: ""
-
 Redis:
   Addr: 127.0.0.1:6379
   Pass: ""
+  DB: 0
 
-Kafka:
+DB:
+  DSN: root:pass@tcp(127.0.0.1:3306)/demo?charset=utf8mb4&parseTime=true&loc=Local
+
+
+KqPusher:
   Brokers:
     - 127.0.0.1:9092
-  Topic: item-api-events
+  Topic: cache-invalidate
 
-# 本地缓存 TTL（秒）
-LocalCacheTTL: 60
-# 事件去重 TTL（秒）
-EventDedupTTL: 600
-# 本地失效频道
-LocalInvalidateChannel: local-invalidate
+KqConsumer:
+  Name: cache-invalidate-consumer   # 可选，来自 service.ServiceConf
+  Brokers:
+    - 127.0.0.1:9092
+  Group: yourapp-api
+  Topic: cache-invalidate
+  Offset: last
+  Conns: 1
+  Consumers: 8
+  Processors: 8
+  MinBytes: 10240
+  MaxBytes: 10485760
+
+Cache:
+  EnableDLock: true
+  DefaultTTL: 300
+  WatchdogMs: 1000
+  LockTTLMs: 1000
+  LockMaxLeaseMs: 10000
+
+TxnMsg:
+  Enable: true
+  BatchSize: 100
+  IntervalMs: 1000
+  MaxRetry: 3
+  Topic: txn-msg
+  DLQTopic: txn-msg-dlq

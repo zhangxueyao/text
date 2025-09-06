@@ -2,14 +2,22 @@ syntax = "proto3";
 package item;
 option go_package = "./itemrpc";
 
-message GetItemReq {int64 id = 1;}
-message ItemResp   {int64 id = 1; string name = 2;}
-message UpdateItemReq {
-  int64 id = 1;
-  string name = 2;
+message GetStockReq {
+  int64 Sku = 1;
 }
-message UpdateItemResp {
+message GetStockResp   {
+  int64 Sku = 1;
+  int64 Qty = 2;
+  int64 Version = 3;
+}
+message DeductStockReq {
+  int64 Sku = 1;
+  int64 delta = 2;
+}
+
+message DeductStockResp {
   bool success = 1;
+  string message = 2;
 }
 
 
@@ -40,8 +48,8 @@ message GetUserResp {
 }
 
 service Item {
-  rpc GetItem (GetItemReq) returns (ItemResp);
-  rpc UpdateItem (UpdateItemReq) returns (UpdateItemResp);
+  rpc GetStock (GetStockReq) returns (GetStockResp);
+  rpc DeductStock (DeductStockReq) returns (DeductStockResp);
   rpc Register (RegisterReq) returns (RegisterResp);
   rpc GetUser (GetUserReq) returns (GetUserResp);
 }

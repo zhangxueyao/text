@@ -21,27 +21,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type GetItemReq struct {
+type GetStockReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Sku           int64                  `protobuf:"varint,1,opt,name=Sku,proto3" json:"Sku,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetItemReq) Reset() {
-	*x = GetItemReq{}
+func (x *GetStockReq) Reset() {
+	*x = GetStockReq{}
 	mi := &file_item_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetItemReq) String() string {
+func (x *GetStockReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetItemReq) ProtoMessage() {}
+func (*GetStockReq) ProtoMessage() {}
 
-func (x *GetItemReq) ProtoReflect() protoreflect.Message {
+func (x *GetStockReq) ProtoReflect() protoreflect.Message {
 	mi := &file_item_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -53,40 +53,41 @@ func (x *GetItemReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetItemReq.ProtoReflect.Descriptor instead.
-func (*GetItemReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetStockReq.ProtoReflect.Descriptor instead.
+func (*GetStockReq) Descriptor() ([]byte, []int) {
 	return file_item_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *GetItemReq) GetId() int64 {
+func (x *GetStockReq) GetSku() int64 {
 	if x != nil {
-		return x.Id
+		return x.Sku
 	}
 	return 0
 }
 
-type ItemResp struct {
+type GetStockResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Sku           int64                  `protobuf:"varint,1,opt,name=Sku,proto3" json:"Sku,omitempty"`
+	Qty           int64                  `protobuf:"varint,2,opt,name=Qty,proto3" json:"Qty,omitempty"`
+	Version       int64                  `protobuf:"varint,3,opt,name=Version,proto3" json:"Version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ItemResp) Reset() {
-	*x = ItemResp{}
+func (x *GetStockResp) Reset() {
+	*x = GetStockResp{}
 	mi := &file_item_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ItemResp) String() string {
+func (x *GetStockResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ItemResp) ProtoMessage() {}
+func (*GetStockResp) ProtoMessage() {}
 
-func (x *ItemResp) ProtoReflect() protoreflect.Message {
+func (x *GetStockResp) ProtoReflect() protoreflect.Message {
 	mi := &file_item_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -98,47 +99,54 @@ func (x *ItemResp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ItemResp.ProtoReflect.Descriptor instead.
-func (*ItemResp) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetStockResp.ProtoReflect.Descriptor instead.
+func (*GetStockResp) Descriptor() ([]byte, []int) {
 	return file_item_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ItemResp) GetId() int64 {
+func (x *GetStockResp) GetSku() int64 {
 	if x != nil {
-		return x.Id
+		return x.Sku
 	}
 	return 0
 }
 
-func (x *ItemResp) GetName() string {
+func (x *GetStockResp) GetQty() int64 {
 	if x != nil {
-		return x.Name
+		return x.Qty
 	}
-	return ""
+	return 0
 }
 
-type UpdateItemReq struct {
+func (x *GetStockResp) GetVersion() int64 {
+	if x != nil {
+		return x.Version
+	}
+	return 0
+}
+
+type DeductStockReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Sku           int64                  `protobuf:"varint,1,opt,name=Sku,proto3" json:"Sku,omitempty"`
+	Delta         int64                  `protobuf:"varint,2,opt,name=delta,proto3" json:"delta,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UpdateItemReq) Reset() {
-	*x = UpdateItemReq{}
+func (x *DeductStockReq) Reset() {
+	*x = DeductStockReq{}
 	mi := &file_item_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateItemReq) String() string {
+func (x *DeductStockReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateItemReq) ProtoMessage() {}
+func (*DeductStockReq) ProtoMessage() {}
 
-func (x *UpdateItemReq) ProtoReflect() protoreflect.Message {
+func (x *DeductStockReq) ProtoReflect() protoreflect.Message {
 	mi := &file_item_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -150,46 +158,47 @@ func (x *UpdateItemReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateItemReq.ProtoReflect.Descriptor instead.
-func (*UpdateItemReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeductStockReq.ProtoReflect.Descriptor instead.
+func (*DeductStockReq) Descriptor() ([]byte, []int) {
 	return file_item_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *UpdateItemReq) GetId() int64 {
+func (x *DeductStockReq) GetSku() int64 {
 	if x != nil {
-		return x.Id
+		return x.Sku
 	}
 	return 0
 }
 
-func (x *UpdateItemReq) GetName() string {
+func (x *DeductStockReq) GetDelta() int64 {
 	if x != nil {
-		return x.Name
+		return x.Delta
 	}
-	return ""
+	return 0
 }
 
-type UpdateItemResp struct {
+type DeductStockResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UpdateItemResp) Reset() {
-	*x = UpdateItemResp{}
+func (x *DeductStockResp) Reset() {
+	*x = DeductStockResp{}
 	mi := &file_item_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateItemResp) String() string {
+func (x *DeductStockResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateItemResp) ProtoMessage() {}
+func (*DeductStockResp) ProtoMessage() {}
 
-func (x *UpdateItemResp) ProtoReflect() protoreflect.Message {
+func (x *DeductStockResp) ProtoReflect() protoreflect.Message {
 	mi := &file_item_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -201,16 +210,23 @@ func (x *UpdateItemResp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateItemResp.ProtoReflect.Descriptor instead.
-func (*UpdateItemResp) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeductStockResp.ProtoReflect.Descriptor instead.
+func (*DeductStockResp) Descriptor() ([]byte, []int) {
 	return file_item_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *UpdateItemResp) GetSuccess() bool {
+func (x *DeductStockResp) GetSuccess() bool {
 	if x != nil {
 		return x.Success
 	}
 	return false
+}
+
+func (x *DeductStockResp) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
 }
 
 type User struct {
@@ -486,18 +502,19 @@ var File_item_proto protoreflect.FileDescriptor
 const file_item_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"item.proto\x12\x04item\"\x1c\n" +
-	"\n" +
-	"GetItemReq\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\".\n" +
-	"\bItemResp\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\"3\n" +
-	"\rUpdateItemReq\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\"*\n" +
-	"\x0eUpdateItemResp\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"z\n" +
+	"item.proto\x12\x04item\"\x1f\n" +
+	"\vGetStockReq\x12\x10\n" +
+	"\x03Sku\x18\x01 \x01(\x03R\x03Sku\"L\n" +
+	"\fGetStockResp\x12\x10\n" +
+	"\x03Sku\x18\x01 \x01(\x03R\x03Sku\x12\x10\n" +
+	"\x03Qty\x18\x02 \x01(\x03R\x03Qty\x12\x18\n" +
+	"\aVersion\x18\x03 \x01(\x03R\aVersion\"8\n" +
+	"\x0eDeductStockReq\x12\x10\n" +
+	"\x03Sku\x18\x01 \x01(\x03R\x03Sku\x12\x14\n" +
+	"\x05delta\x18\x02 \x01(\x03R\x05delta\"E\n" +
+	"\x0fDeductStockResp\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"z\n" +
 	"\x04User\x12\x16\n" +
 	"\x06mobile\x18\x01 \x01(\tR\x06mobile\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x14\n" +
@@ -516,11 +533,10 @@ const file_item_proto_rawDesc = "" +
 	"\vGetUserResp\x12\x1e\n" +
 	"\x04user\x18\x01 \x01(\v2\n" +
 	".item.UserR\x04user\x12\x16\n" +
-	"\x06exists\x18\x02 \x01(\bR\x06exists2\xcf\x01\n" +
-	"\x04Item\x12+\n" +
-	"\aGetItem\x12\x10.item.GetItemReq\x1a\x0e.item.ItemResp\x127\n" +
-	"\n" +
-	"UpdateItem\x12\x13.item.UpdateItemReq\x1a\x14.item.UpdateItemResp\x121\n" +
+	"\x06exists\x18\x02 \x01(\bR\x06exists2\xd8\x01\n" +
+	"\x04Item\x121\n" +
+	"\bGetStock\x12\x11.item.GetStockReq\x1a\x12.item.GetStockResp\x12:\n" +
+	"\vDeductStock\x12\x14.item.DeductStockReq\x1a\x15.item.DeductStockResp\x121\n" +
 	"\bRegister\x12\x11.item.RegisterReq\x1a\x12.item.RegisterResp\x12.\n" +
 	"\aGetUser\x12\x10.item.GetUserReq\x1a\x11.item.GetUserRespB\vZ\t./itemrpcb\x06proto3"
 
@@ -538,25 +554,25 @@ func file_item_proto_rawDescGZIP() []byte {
 
 var file_item_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_item_proto_goTypes = []any{
-	(*GetItemReq)(nil),     // 0: item.GetItemReq
-	(*ItemResp)(nil),       // 1: item.ItemResp
-	(*UpdateItemReq)(nil),  // 2: item.UpdateItemReq
-	(*UpdateItemResp)(nil), // 3: item.UpdateItemResp
-	(*User)(nil),           // 4: item.User
-	(*RegisterReq)(nil),    // 5: item.RegisterReq
-	(*RegisterResp)(nil),   // 6: item.RegisterResp
-	(*GetUserReq)(nil),     // 7: item.GetUserReq
-	(*GetUserResp)(nil),    // 8: item.GetUserResp
+	(*GetStockReq)(nil),     // 0: item.GetStockReq
+	(*GetStockResp)(nil),    // 1: item.GetStockResp
+	(*DeductStockReq)(nil),  // 2: item.DeductStockReq
+	(*DeductStockResp)(nil), // 3: item.DeductStockResp
+	(*User)(nil),            // 4: item.User
+	(*RegisterReq)(nil),     // 5: item.RegisterReq
+	(*RegisterResp)(nil),    // 6: item.RegisterResp
+	(*GetUserReq)(nil),      // 7: item.GetUserReq
+	(*GetUserResp)(nil),     // 8: item.GetUserResp
 }
 var file_item_proto_depIdxs = []int32{
 	4, // 0: item.RegisterReq.user:type_name -> item.User
 	4, // 1: item.GetUserResp.user:type_name -> item.User
-	0, // 2: item.Item.GetItem:input_type -> item.GetItemReq
-	2, // 3: item.Item.UpdateItem:input_type -> item.UpdateItemReq
+	0, // 2: item.Item.GetStock:input_type -> item.GetStockReq
+	2, // 3: item.Item.DeductStock:input_type -> item.DeductStockReq
 	5, // 4: item.Item.Register:input_type -> item.RegisterReq
 	7, // 5: item.Item.GetUser:input_type -> item.GetUserReq
-	1, // 6: item.Item.GetItem:output_type -> item.ItemResp
-	3, // 7: item.Item.UpdateItem:output_type -> item.UpdateItemResp
+	1, // 6: item.Item.GetStock:output_type -> item.GetStockResp
+	3, // 7: item.Item.DeductStock:output_type -> item.DeductStockResp
 	6, // 8: item.Item.Register:output_type -> item.RegisterResp
 	8, // 9: item.Item.GetUser:output_type -> item.GetUserResp
 	6, // [6:10] is the sub-list for method output_type
