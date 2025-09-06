@@ -27,21 +27,24 @@ func (f *funcService) Start() { f.start() }
 func (f *funcService) Stop()  { f.stop() }
 
 type ServiceContext struct {
-	Config      config.Config
-	DB          sqlx.SqlConn
-	Rdb         *redis.Client
-	KqPusher    *kq.Pusher
-	KqQueue     queue.MessageQueue
-	CacheMgr    *cachex.Manager
-	TxnStore    *txnmsg.Store
-	Dispatcher  *txnmsg.Dispatcher
-	DefaultTTL  time.Duration
-	ItemModel   model.ItemModel
-	UserModel   model.UserModel
-	StockModel  model.StockModel
-	OutboxModel model.OutboxModel
-	Snowflake   *pkg.SnowflakeIDGenerator
-	Group       *service.ServiceGroup
+	Config         config.Config
+	DB             sqlx.SqlConn
+	Rdb            *redis.Client
+	KqPusher       *kq.Pusher
+	KqQueue        queue.MessageQueue
+	CacheMgr       *cachex.Manager
+	TxnStore       *txnmsg.Store
+	Dispatcher     *txnmsg.Dispatcher
+	DefaultTTL     time.Duration
+	ItemModel      model.ItemModel
+	UserModel      model.UserModel
+	AccountModel   model.AccountModel
+	PayTxnModel    model.PayTxnModel
+	TccBranchModel model.TccBranchModel
+	StockModel     model.StockModel
+	OutboxModel    model.OutboxModel
+	Snowflake      *pkg.SnowflakeIDGenerator
+	Group          *service.ServiceGroup
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -95,20 +98,23 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	g.Add(newQueue) // 启动 kq 消费者
 
 	return &ServiceContext{
-		Config:      c,
-		DB:          db,
-		Rdb:         rdb,
-		KqPusher:    pusher,
-		KqQueue:     newQueue,
-		CacheMgr:    cm,
-		TxnStore:    store,
-		Dispatcher:  dispatcher,
-		DefaultTTL:  time.Duration(c.Cache.DefaultTTL) * time.Second,
-		ItemModel:   model.NewItemModel(db),
-		UserModel:   model.NewUserModel(db),
-		OutboxModel: model.NewOutboxModel(db),
-		StockModel:  model.NewStockModel(db),
-		Snowflake:   snowflake,
-		Group:       g,
+		Config:         c,
+		DB:             db,
+		Rdb:            rdb,
+		KqPusher:       pusher,
+		KqQueue:        newQueue,
+		CacheMgr:       cm,
+		TxnStore:       store,
+		Dispatcher:     dispatcher,
+		DefaultTTL:     time.Duration(c.Cache.DefaultTTL) * time.Second,
+		ItemModel:      model.NewItemModel(db),
+		UserModel:      model.NewUserModel(db),
+		AccountModel:   model.NewAccountModel(db),
+		PayTxnModel:    model.NewPayTxnModel(db),
+		TccBranchModel: model.NewTccBranchModel(db),
+		OutboxModel:    model.NewOutboxModel(db),
+		StockModel:     model.NewStockModel(db),
+		Snowflake:      snowflake,
+		Group:          g,
 	}
 }

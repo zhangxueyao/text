@@ -23,6 +23,9 @@ const (
 	Item_DeductStock_FullMethodName = "/item.Item/DeductStock"
 	Item_Register_FullMethodName    = "/item.Item/Register"
 	Item_GetUser_FullMethodName     = "/item.Item/GetUser"
+	Item_TryPay_FullMethodName      = "/item.Item/TryPay"
+	Item_ConfirmPay_FullMethodName  = "/item.Item/ConfirmPay"
+	Item_CancelPay_FullMethodName   = "/item.Item/CancelPay"
 )
 
 // ItemClient is the client API for Item service.
@@ -33,6 +36,9 @@ type ItemClient interface {
 	DeductStock(ctx context.Context, in *DeductStockReq, opts ...grpc.CallOption) (*DeductStockResp, error)
 	Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error)
 	GetUser(ctx context.Context, in *GetUserReq, opts ...grpc.CallOption) (*GetUserResp, error)
+	TryPay(ctx context.Context, in *PayTryReq, opts ...grpc.CallOption) (*PayAck, error)
+	ConfirmPay(ctx context.Context, in *PayConfirmReq, opts ...grpc.CallOption) (*PayAck, error)
+	CancelPay(ctx context.Context, in *PayCancelReq, opts ...grpc.CallOption) (*PayAck, error)
 }
 
 type itemClient struct {
@@ -83,6 +89,36 @@ func (c *itemClient) GetUser(ctx context.Context, in *GetUserReq, opts ...grpc.C
 	return out, nil
 }
 
+func (c *itemClient) TryPay(ctx context.Context, in *PayTryReq, opts ...grpc.CallOption) (*PayAck, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PayAck)
+	err := c.cc.Invoke(ctx, Item_TryPay_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *itemClient) ConfirmPay(ctx context.Context, in *PayConfirmReq, opts ...grpc.CallOption) (*PayAck, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PayAck)
+	err := c.cc.Invoke(ctx, Item_ConfirmPay_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *itemClient) CancelPay(ctx context.Context, in *PayCancelReq, opts ...grpc.CallOption) (*PayAck, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PayAck)
+	err := c.cc.Invoke(ctx, Item_CancelPay_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ItemServer is the server API for Item service.
 // All implementations must embed UnimplementedItemServer
 // for forward compatibility.
@@ -91,6 +127,9 @@ type ItemServer interface {
 	DeductStock(context.Context, *DeductStockReq) (*DeductStockResp, error)
 	Register(context.Context, *RegisterReq) (*RegisterResp, error)
 	GetUser(context.Context, *GetUserReq) (*GetUserResp, error)
+	TryPay(context.Context, *PayTryReq) (*PayAck, error)
+	ConfirmPay(context.Context, *PayConfirmReq) (*PayAck, error)
+	CancelPay(context.Context, *PayCancelReq) (*PayAck, error)
 	mustEmbedUnimplementedItemServer()
 }
 
@@ -112,6 +151,15 @@ func (UnimplementedItemServer) Register(context.Context, *RegisterReq) (*Registe
 }
 func (UnimplementedItemServer) GetUser(context.Context, *GetUserReq) (*GetUserResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
+}
+func (UnimplementedItemServer) TryPay(context.Context, *PayTryReq) (*PayAck, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TryPay not implemented")
+}
+func (UnimplementedItemServer) ConfirmPay(context.Context, *PayConfirmReq) (*PayAck, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfirmPay not implemented")
+}
+func (UnimplementedItemServer) CancelPay(context.Context, *PayCancelReq) (*PayAck, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CancelPay not implemented")
 }
 func (UnimplementedItemServer) mustEmbedUnimplementedItemServer() {}
 func (UnimplementedItemServer) testEmbeddedByValue()              {}
@@ -206,6 +254,60 @@ func _Item_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Item_TryPay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PayTryReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ItemServer).TryPay(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Item_TryPay_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ItemServer).TryPay(ctx, req.(*PayTryReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Item_ConfirmPay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PayConfirmReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ItemServer).ConfirmPay(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Item_ConfirmPay_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ItemServer).ConfirmPay(ctx, req.(*PayConfirmReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Item_CancelPay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PayCancelReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ItemServer).CancelPay(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Item_CancelPay_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ItemServer).CancelPay(ctx, req.(*PayCancelReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Item_ServiceDesc is the grpc.ServiceDesc for Item service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -228,6 +330,18 @@ var Item_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUser",
 			Handler:    _Item_GetUser_Handler,
+		},
+		{
+			MethodName: "TryPay",
+			Handler:    _Item_TryPay_Handler,
+		},
+		{
+			MethodName: "ConfirmPay",
+			Handler:    _Item_ConfirmPay_Handler,
+		},
+		{
+			MethodName: "CancelPay",
+			Handler:    _Item_CancelPay_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

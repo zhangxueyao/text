@@ -497,6 +497,254 @@ func (x *GetUserResp) GetExists() bool {
 	return false
 }
 
+type PayTryReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Xid           string                 `protobuf:"bytes,1,opt,name=xid,proto3" json:"xid,omitempty"` // 全局事务ID
+	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OrderId       int64                  `protobuf:"varint,3,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	Amount        int64                  `protobuf:"varint,4,opt,name=amount,proto3" json:"amount,omitempty"` // 分（正整数）
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PayTryReq) Reset() {
+	*x = PayTryReq{}
+	mi := &file_item_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PayTryReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PayTryReq) ProtoMessage() {}
+
+func (x *PayTryReq) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PayTryReq.ProtoReflect.Descriptor instead.
+func (*PayTryReq) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *PayTryReq) GetXid() string {
+	if x != nil {
+		return x.Xid
+	}
+	return ""
+}
+
+func (x *PayTryReq) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *PayTryReq) GetOrderId() int64 {
+	if x != nil {
+		return x.OrderId
+	}
+	return 0
+}
+
+func (x *PayTryReq) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+type PayAck struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ok            bool                   `protobuf:"varint,1,opt,name=ok,proto3" json:"ok,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PayAck) Reset() {
+	*x = PayAck{}
+	mi := &file_item_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PayAck) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PayAck) ProtoMessage() {}
+
+func (x *PayAck) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PayAck.ProtoReflect.Descriptor instead.
+func (*PayAck) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *PayAck) GetOk() bool {
+	if x != nil {
+		return x.Ok
+	}
+	return false
+}
+
+type PayConfirmReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Xid           string                 `protobuf:"bytes,1,opt,name=xid,proto3" json:"xid,omitempty"`
+	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OrderId       int64                  `protobuf:"varint,3,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	Amount        int64                  `protobuf:"varint,4,opt,name=amount,proto3" json:"amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PayConfirmReq) Reset() {
+	*x = PayConfirmReq{}
+	mi := &file_item_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PayConfirmReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PayConfirmReq) ProtoMessage() {}
+
+func (x *PayConfirmReq) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PayConfirmReq.ProtoReflect.Descriptor instead.
+func (*PayConfirmReq) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *PayConfirmReq) GetXid() string {
+	if x != nil {
+		return x.Xid
+	}
+	return ""
+}
+
+func (x *PayConfirmReq) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *PayConfirmReq) GetOrderId() int64 {
+	if x != nil {
+		return x.OrderId
+	}
+	return 0
+}
+
+func (x *PayConfirmReq) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+type PayCancelReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Xid           string                 `protobuf:"bytes,1,opt,name=xid,proto3" json:"xid,omitempty"`
+	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OrderId       int64                  `protobuf:"varint,3,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	Amount        int64                  `protobuf:"varint,4,opt,name=amount,proto3" json:"amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PayCancelReq) Reset() {
+	*x = PayCancelReq{}
+	mi := &file_item_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PayCancelReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PayCancelReq) ProtoMessage() {}
+
+func (x *PayCancelReq) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PayCancelReq.ProtoReflect.Descriptor instead.
+func (*PayCancelReq) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *PayCancelReq) GetXid() string {
+	if x != nil {
+		return x.Xid
+	}
+	return ""
+}
+
+func (x *PayCancelReq) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *PayCancelReq) GetOrderId() int64 {
+	if x != nil {
+		return x.OrderId
+	}
+	return 0
+}
+
+func (x *PayCancelReq) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
 var File_item_proto protoreflect.FileDescriptor
 
 const file_item_proto_rawDesc = "" +
@@ -533,12 +781,33 @@ const file_item_proto_rawDesc = "" +
 	"\vGetUserResp\x12\x1e\n" +
 	"\x04user\x18\x01 \x01(\v2\n" +
 	".item.UserR\x04user\x12\x16\n" +
-	"\x06exists\x18\x02 \x01(\bR\x06exists2\xd8\x01\n" +
+	"\x06exists\x18\x02 \x01(\bR\x06exists\"i\n" +
+	"\tPayTryReq\x12\x10\n" +
+	"\x03xid\x18\x01 \x01(\tR\x03xid\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x19\n" +
+	"\border_id\x18\x03 \x01(\x03R\aorderId\x12\x16\n" +
+	"\x06amount\x18\x04 \x01(\x03R\x06amount\"\x18\n" +
+	"\x06PayAck\x12\x0e\n" +
+	"\x02ok\x18\x01 \x01(\bR\x02ok\"m\n" +
+	"\rPayConfirmReq\x12\x10\n" +
+	"\x03xid\x18\x01 \x01(\tR\x03xid\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x19\n" +
+	"\border_id\x18\x03 \x01(\x03R\aorderId\x12\x16\n" +
+	"\x06amount\x18\x04 \x01(\x03R\x06amount\"l\n" +
+	"\fPayCancelReq\x12\x10\n" +
+	"\x03xid\x18\x01 \x01(\tR\x03xid\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x19\n" +
+	"\border_id\x18\x03 \x01(\x03R\aorderId\x12\x16\n" +
+	"\x06amount\x18\x04 \x01(\x03R\x06amount2\xe1\x02\n" +
 	"\x04Item\x121\n" +
 	"\bGetStock\x12\x11.item.GetStockReq\x1a\x12.item.GetStockResp\x12:\n" +
 	"\vDeductStock\x12\x14.item.DeductStockReq\x1a\x15.item.DeductStockResp\x121\n" +
 	"\bRegister\x12\x11.item.RegisterReq\x1a\x12.item.RegisterResp\x12.\n" +
-	"\aGetUser\x12\x10.item.GetUserReq\x1a\x11.item.GetUserRespB\vZ\t./itemrpcb\x06proto3"
+	"\aGetUser\x12\x10.item.GetUserReq\x1a\x11.item.GetUserResp\x12'\n" +
+	"\x06TryPay\x12\x0f.item.PayTryReq\x1a\f.item.PayAck\x12/\n" +
+	"\n" +
+	"ConfirmPay\x12\x13.item.PayConfirmReq\x1a\f.item.PayAck\x12-\n" +
+	"\tCancelPay\x12\x12.item.PayCancelReq\x1a\f.item.PayAckB\vZ\t./itemrpcb\x06proto3"
 
 var (
 	file_item_proto_rawDescOnce sync.Once
@@ -552,7 +821,7 @@ func file_item_proto_rawDescGZIP() []byte {
 	return file_item_proto_rawDescData
 }
 
-var file_item_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_item_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_item_proto_goTypes = []any{
 	(*GetStockReq)(nil),     // 0: item.GetStockReq
 	(*GetStockResp)(nil),    // 1: item.GetStockResp
@@ -563,23 +832,33 @@ var file_item_proto_goTypes = []any{
 	(*RegisterResp)(nil),    // 6: item.RegisterResp
 	(*GetUserReq)(nil),      // 7: item.GetUserReq
 	(*GetUserResp)(nil),     // 8: item.GetUserResp
+	(*PayTryReq)(nil),       // 9: item.PayTryReq
+	(*PayAck)(nil),          // 10: item.PayAck
+	(*PayConfirmReq)(nil),   // 11: item.PayConfirmReq
+	(*PayCancelReq)(nil),    // 12: item.PayCancelReq
 }
 var file_item_proto_depIdxs = []int32{
-	4, // 0: item.RegisterReq.user:type_name -> item.User
-	4, // 1: item.GetUserResp.user:type_name -> item.User
-	0, // 2: item.Item.GetStock:input_type -> item.GetStockReq
-	2, // 3: item.Item.DeductStock:input_type -> item.DeductStockReq
-	5, // 4: item.Item.Register:input_type -> item.RegisterReq
-	7, // 5: item.Item.GetUser:input_type -> item.GetUserReq
-	1, // 6: item.Item.GetStock:output_type -> item.GetStockResp
-	3, // 7: item.Item.DeductStock:output_type -> item.DeductStockResp
-	6, // 8: item.Item.Register:output_type -> item.RegisterResp
-	8, // 9: item.Item.GetUser:output_type -> item.GetUserResp
-	6, // [6:10] is the sub-list for method output_type
-	2, // [2:6] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	4,  // 0: item.RegisterReq.user:type_name -> item.User
+	4,  // 1: item.GetUserResp.user:type_name -> item.User
+	0,  // 2: item.Item.GetStock:input_type -> item.GetStockReq
+	2,  // 3: item.Item.DeductStock:input_type -> item.DeductStockReq
+	5,  // 4: item.Item.Register:input_type -> item.RegisterReq
+	7,  // 5: item.Item.GetUser:input_type -> item.GetUserReq
+	9,  // 6: item.Item.TryPay:input_type -> item.PayTryReq
+	11, // 7: item.Item.ConfirmPay:input_type -> item.PayConfirmReq
+	12, // 8: item.Item.CancelPay:input_type -> item.PayCancelReq
+	1,  // 9: item.Item.GetStock:output_type -> item.GetStockResp
+	3,  // 10: item.Item.DeductStock:output_type -> item.DeductStockResp
+	6,  // 11: item.Item.Register:output_type -> item.RegisterResp
+	8,  // 12: item.Item.GetUser:output_type -> item.GetUserResp
+	10, // 13: item.Item.TryPay:output_type -> item.PayAck
+	10, // 14: item.Item.ConfirmPay:output_type -> item.PayAck
+	10, // 15: item.Item.CancelPay:output_type -> item.PayAck
+	9,  // [9:16] is the sub-list for method output_type
+	2,  // [2:9] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_item_proto_init() }
@@ -593,7 +872,7 @@ func file_item_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_item_proto_rawDesc), len(file_item_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

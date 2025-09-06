@@ -47,9 +47,25 @@ message GetUserResp {
   bool exists = 2;
 }
 
+message PayTryReq {
+  string xid = 1;         // 全局事务ID
+  int64  user_id = 2;
+  int64  order_id = 3;
+  int64  amount = 4;      // 分（正整数）
+}
+
+message PayAck {bool ok = 1;}
+
+message PayConfirmReq {string xid = 1; int64 user_id = 2; int64 order_id = 3; int64 amount = 4;}
+message PayCancelReq  {string xid = 1; int64 user_id = 2; int64 order_id = 3; int64 amount = 4;}
+
+
 service Item {
   rpc GetStock (GetStockReq) returns (GetStockResp);
   rpc DeductStock (DeductStockReq) returns (DeductStockResp);
   rpc Register (RegisterReq) returns (RegisterResp);
   rpc GetUser (GetUserReq) returns (GetUserResp);
+  rpc TryPay     (PayTryReq)     returns (PayAck);
+  rpc ConfirmPay (PayConfirmReq) returns (PayAck);
+  rpc CancelPay  (PayCancelReq)  returns (PayAck);
 }

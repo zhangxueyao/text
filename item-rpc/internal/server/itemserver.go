@@ -42,3 +42,18 @@ func (s *ItemServer) GetUser(ctx context.Context, in *itemrpc.GetUserReq) (*item
 	l := logic.NewGetUserLogic(ctx, s.svcCtx)
 	return l.GetUser(in)
 }
+
+func (s *ItemServer) TryPay(ctx context.Context, in *itemrpc.PayTryReq) (*itemrpc.PayAck, error) {
+	l := logic.NewTryPayLogic(ctx, s.svcCtx)
+	return l.TryPay(in)
+}
+
+func (s *ItemServer) ConfirmPay(ctx context.Context, in *itemrpc.PayConfirmReq) (*itemrpc.PayAck, error) {
+	l := logic.NewConfirmPayLogic(ctx, s.svcCtx)
+	return l.ConfirmPay(in)
+}
+
+func (s *ItemServer) CancelPay(ctx context.Context, in *itemrpc.PayCancelReq) (*itemrpc.PayAck, error) {
+	l := logic.NewCancelPayLogic(ctx, s.svcCtx)
+	return l.CancelPay(in)
+}

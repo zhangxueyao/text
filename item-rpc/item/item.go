@@ -20,6 +20,10 @@ type (
 	GetStockResp    = itemrpc.GetStockResp
 	GetUserReq      = itemrpc.GetUserReq
 	GetUserResp     = itemrpc.GetUserResp
+	PayAck          = itemrpc.PayAck
+	PayCancelReq    = itemrpc.PayCancelReq
+	PayConfirmReq   = itemrpc.PayConfirmReq
+	PayTryReq       = itemrpc.PayTryReq
 	RegisterReq     = itemrpc.RegisterReq
 	RegisterResp    = itemrpc.RegisterResp
 	User            = itemrpc.User
@@ -29,6 +33,9 @@ type (
 		DeductStock(ctx context.Context, in *DeductStockReq, opts ...grpc.CallOption) (*DeductStockResp, error)
 		Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error)
 		GetUser(ctx context.Context, in *GetUserReq, opts ...grpc.CallOption) (*GetUserResp, error)
+		TryPay(ctx context.Context, in *PayTryReq, opts ...grpc.CallOption) (*PayAck, error)
+		ConfirmPay(ctx context.Context, in *PayConfirmReq, opts ...grpc.CallOption) (*PayAck, error)
+		CancelPay(ctx context.Context, in *PayCancelReq, opts ...grpc.CallOption) (*PayAck, error)
 	}
 
 	defaultItem struct {
@@ -60,4 +67,19 @@ func (m *defaultItem) Register(ctx context.Context, in *RegisterReq, opts ...grp
 func (m *defaultItem) GetUser(ctx context.Context, in *GetUserReq, opts ...grpc.CallOption) (*GetUserResp, error) {
 	client := itemrpc.NewItemClient(m.cli.Conn())
 	return client.GetUser(ctx, in, opts...)
+}
+
+func (m *defaultItem) TryPay(ctx context.Context, in *PayTryReq, opts ...grpc.CallOption) (*PayAck, error) {
+	client := itemrpc.NewItemClient(m.cli.Conn())
+	return client.TryPay(ctx, in, opts...)
+}
+
+func (m *defaultItem) ConfirmPay(ctx context.Context, in *PayConfirmReq, opts ...grpc.CallOption) (*PayAck, error) {
+	client := itemrpc.NewItemClient(m.cli.Conn())
+	return client.ConfirmPay(ctx, in, opts...)
+}
+
+func (m *defaultItem) CancelPay(ctx context.Context, in *PayCancelReq, opts ...grpc.CallOption) (*PayAck, error) {
+	client := itemrpc.NewItemClient(m.cli.Conn())
+	return client.CancelPay(ctx, in, opts...)
 }
