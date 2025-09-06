@@ -23,14 +23,14 @@ func NewItemServer(svcCtx *svc.ServiceContext) *ItemServer {
 	}
 }
 
-func (s *ItemServer) GetItem(ctx context.Context, in *itemrpc.GetItemReq) (*itemrpc.ItemResp, error) {
-	l := logic.NewGetItemLogic(ctx, s.svcCtx)
-	return l.GetItem(in)
+func (s *ItemServer) GetStock(ctx context.Context, in *itemrpc.GetStockReq) (*itemrpc.GetStockResp, error) {
+	l := logic.NewGetStockLogic(ctx, s.svcCtx)
+	return l.GetStock(in)
 }
 
-func (s *ItemServer) UpdateItem(ctx context.Context, in *itemrpc.UpdateItemReq) (*itemrpc.UpdateItemResp, error) {
-	l := logic.NewUpdateItemLogic(ctx, s.svcCtx)
-	return l.UpdateItem(in)
+func (s *ItemServer) DeductStock(ctx context.Context, in *itemrpc.DeductStockReq) (*itemrpc.DeductStockResp, error) {
+	l := logic.NewDeductStockLogic(ctx, s.svcCtx)
+	return l.DeductStock(in)
 }
 
 func (s *ItemServer) Register(ctx context.Context, in *itemrpc.RegisterReq) (*itemrpc.RegisterResp, error) {

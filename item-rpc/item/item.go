@@ -14,19 +14,19 @@ import (
 )
 
 type (
-	GetItemReq     = itemrpc.GetItemReq
-	GetUserReq     = itemrpc.GetUserReq
-	GetUserResp    = itemrpc.GetUserResp
-	ItemResp       = itemrpc.ItemResp
-	RegisterReq    = itemrpc.RegisterReq
-	RegisterResp   = itemrpc.RegisterResp
-	UpdateItemReq  = itemrpc.UpdateItemReq
-	UpdateItemResp = itemrpc.UpdateItemResp
-	User           = itemrpc.User
+	DeductStockReq  = itemrpc.DeductStockReq
+	DeductStockResp = itemrpc.DeductStockResp
+	GetStockReq     = itemrpc.GetStockReq
+	GetStockResp    = itemrpc.GetStockResp
+	GetUserReq      = itemrpc.GetUserReq
+	GetUserResp     = itemrpc.GetUserResp
+	RegisterReq     = itemrpc.RegisterReq
+	RegisterResp    = itemrpc.RegisterResp
+	User            = itemrpc.User
 
 	Item interface {
-		GetItem(ctx context.Context, in *GetItemReq, opts ...grpc.CallOption) (*ItemResp, error)
-		UpdateItem(ctx context.Context, in *UpdateItemReq, opts ...grpc.CallOption) (*UpdateItemResp, error)
+		GetStock(ctx context.Context, in *GetStockReq, opts ...grpc.CallOption) (*GetStockResp, error)
+		DeductStock(ctx context.Context, in *DeductStockReq, opts ...grpc.CallOption) (*DeductStockResp, error)
 		Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error)
 		GetUser(ctx context.Context, in *GetUserReq, opts ...grpc.CallOption) (*GetUserResp, error)
 	}
@@ -42,14 +42,14 @@ func NewItem(cli zrpc.Client) Item {
 	}
 }
 
-func (m *defaultItem) GetItem(ctx context.Context, in *GetItemReq, opts ...grpc.CallOption) (*ItemResp, error) {
+func (m *defaultItem) GetStock(ctx context.Context, in *GetStockReq, opts ...grpc.CallOption) (*GetStockResp, error) {
 	client := itemrpc.NewItemClient(m.cli.Conn())
-	return client.GetItem(ctx, in, opts...)
+	return client.GetStock(ctx, in, opts...)
 }
 
-func (m *defaultItem) UpdateItem(ctx context.Context, in *UpdateItemReq, opts ...grpc.CallOption) (*UpdateItemResp, error) {
+func (m *defaultItem) DeductStock(ctx context.Context, in *DeductStockReq, opts ...grpc.CallOption) (*DeductStockResp, error) {
 	client := itemrpc.NewItemClient(m.cli.Conn())
-	return client.UpdateItem(ctx, in, opts...)
+	return client.DeductStock(ctx, in, opts...)
 }
 
 func (m *defaultItem) Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error) {

@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"time"
 
-	cachex "github.com/zhangxueyao/item/item-rpc/cache"
 	"github.com/zhangxueyao/item/item-rpc/internal/model"
 	"github.com/zhangxueyao/item/item-rpc/internal/svc"
 )
